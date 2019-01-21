@@ -1,4 +1,4 @@
-function Labeling_64(segementAxis)
+% function Labeling_64(segementAxis)
 
 %Labeling_64 Divides images into segemnts for waste class labeling 
 %
@@ -23,6 +23,7 @@ function Labeling_64(segementAxis)
 if nargin == 0
     segementAxis = 4; %must be square of segments along each exis
 end
+segementAxis = 4;
 numSegments = segementAxis^2;
 
 % Variable initialisation for input dialouge.
@@ -43,7 +44,7 @@ end
 
 % Image filename acquisition 
 myFolder = uigetdir;
-filePattern = fullfile(myFolder, '*.jpg');
+filePattern = fullfile(myFolder, '*.JPG');
 jpegFiles = dir(filePattern);
 x = {jpegFiles.name};
 
