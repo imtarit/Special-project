@@ -29,6 +29,8 @@ numSegments = segementAxis^2;
 defs = cell(1,numSegments); % default class = 0
 defs(1,:)={'0'};
 options.WindowStyle = 'normal';
+options.Interpreter = 'none';
+options.Resize = 'on';
 variableNames = {'filename','image'};
 inputname = {};
 inputDims = [1 10];
@@ -92,7 +94,7 @@ for k = 1:length(jpegFiles)
       end
       
       % Segment classes
-      v = inputdlg(inputname,inputTitle,inputDims,defs,options);
+      v = inputdlgcol(inputname,inputTitle,inputDims,defs,options,2);
   else % If worng input then all classes are 0 add to error list
       waitfor(msgbox('The class should be 0/1', 'Warning'));
       x(2,k) = {'0'};
