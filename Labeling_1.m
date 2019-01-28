@@ -1,4 +1,4 @@
-function Labeling_64(segementAxis)
+function Labeling_1(segementAxis)
 
 %Labeling_64 Divides images into segemnts for waste class labeling 
 %
@@ -18,9 +18,9 @@ function Labeling_64(segementAxis)
 %   
 % (C) Fayeem Aziz, University of Newcastle, Australia
 
-if nargin == 0
-    segementAxis = 4; %must be square of segments along each exis
-end
+% if nargin == 0
+%     segementAxis = 4; %must be square of segments along each exis
+% end
 % segementAxis = 4;
 numSegments = segementAxis^2;
 
@@ -41,22 +41,23 @@ for i = 1:(numSegments)
 end
 
 % Image filename acquisition 
-myFolder = uigetdir;
-filePattern = fullfile(myFolder, '*.JPG');
-jpegFiles = dir(filePattern);
-x = {jpegFiles.name};
-
-
-errFiles = {}; % List of error files
-
-% loop thorugh jpg files
-for k = 1:length(jpegFiles)
+[filename,filepath]=uigetfile({'*.JPG'},'Select and image');
+% myFolder = uigetdir;
+% filePattern = fullfile(myFolder, '*.JPG');
+% jpegFiles = dir(filePattern);
+x = {filename};
+% 
+% 
+% errFiles = {}; % List of error files
+% 
+% % loop thorugh jpg files
+% for k = 1:length(jpegFiles)
     
-  baseFileName = jpegFiles(k).name;
+%   baseFileName = jpegFiles(k).name;
   
   % Image acquisition
-  fullFileName = fullfile(myFolder, baseFileName);
-  fprintf(1, 'Now reading %s\n', baseFileName);
+  fullFileName = fullfile(filepath, filename);
+  fprintf(1, 'Now reading %s\n', filename);
   imageArray = imread(fullFileName);
   
   % Image show
@@ -67,7 +68,7 @@ for k = 1:length(jpegFiles)
   
   % Image class 1 for waste 0 for no waste
   v = inputdlg({'Image 0/1'},inputTitle,inputDims,{'0'},options);
-  x(2,k) = v;
+  x(2) = v;
   
   if strcmp(v,'0') % If no waste all segements are 0 class 
       v = defs;
@@ -98,24 +99,25 @@ for k = 1:length(jpegFiles)
       waitfor(msgbox('The class should be 0/1', 'Warning'));
       x(2,k) = {'0'};
       v = defs;
-      errFiles(end+1) = {baseFileName};
+%       errFiles(end+1) = {baseFileName};
   end
   
   % Set classes to table x
   for i = 1:length(v)
-      x(i+2,k) = v(i);
+      x(i+2) = v(i);
   end
   close
 
 
 
 
-end
+% end
 % Save all file name and classes
-x = cell2table(x','VariableNames',variableNames);
-writetable(x,fullfile(myFolder, 'filelist.csv'));
+x = cell2table(x,'VariableNames',variableNames);
+disp(x)
+% writetable(x,fullfile(myFolder, 'filelist.csv'));
 
 % Save list of error files
-filePh = fopen(fullfile(myFolder, 'error_file_list.txt'),'w');
-fprintf(filePh,'%s\n',errFiles{:});
-fclose(filePh);
+% filePh = fopen(fullfile(myFolder, 'error_file_list.txt'),'w');
+% fprintf(filePh,'%s\n',errFiles{:});
+% fclose(filePh);
