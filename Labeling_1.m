@@ -18,9 +18,9 @@ function Labeling_1(segementAxis)
 %   
 % (C) Fayeem Aziz, University of Newcastle, Australia
 
-% if nargin == 0
-%     segementAxis = 4; %must be square of segments along each exis
-% end
+if nargin == 0
+    segementAxis = 4; %must be square of segments along each exis
+ end
 % segementAxis = 4;
 numSegments = segementAxis^2;
 
