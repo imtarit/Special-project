@@ -1,0 +1,10 @@
+v = readtable('..\Data\final_label.csv');
+v = table2array(v(:,2:9));
+class1 = find(v(:,1)==1);
+class2 = find(v(:,2)==1);
+class3 = find(v(:,3)==1);
+class4 = find(v(:,4)==1);
+class5 = find(v(:,5)==1);
+class6 = find(v(:,6)==1);
+class7 = find(v(:,7)==1);
+class8 = find(v(:,8)==1);
